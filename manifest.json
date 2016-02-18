@@ -10,7 +10,8 @@
     "activeTab",
     "webRequest",
     "webRequestBlocking",
-    "*://*.google.com/"
+    "http://*/*",
+    "https://*/*"
   ],
 
   "browser_action": {
