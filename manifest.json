@@ -4,9 +4,14 @@
   "description": "Try to find Google ads by refreshing pages",
   "devtools_page": "gadfinder.html",
   "manifest_version": 2,
-   "content_security_policy": "default-src 'self'  chrome-extension-resource: ; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';  connect-src *; frame-src *;",
-    "web_accessible_resources":
-    [
-      "*"
-    ]
+  "content_security_policy": "default-src 'self'  chrome-extension-resource: ; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval';  connect-src *; frame-src *;",
+  "web_accessible_resources":
+   [
+     "*"
+   ],
+  "permissions": 
+   [
+     "tabs",
+     "activeTab"
+   ]
 }
