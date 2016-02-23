@@ -1,17 +1,31 @@
-var count = 0;
+var count = 1;
+var NTries = 0;
+//var done = false;
 
-//TODO: bug
-// When reloading the extension, it auto refreshes the extension page
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
+
   if (info.status == "complete") {
-    if (count < 3) {
+    if (count < NTries) {
       chrome.tabs.reload(null, null, null);
       count++;
+      alert(count);
     }
+    // else if (!done)
+    //   alert("not found");
+    //   count = 0;
+    //   done = true;
+    // }
   }
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  alert("Ad found! Stopping refresh!");
-  if (request.foundAd == "yes") count = 10;
+  if (request.foundAd == "yes") {
+    count = NTries;
+    alert("Ad found! Stopping refresh!");
+  }
+  if (request.NTries) {
+    NTries = request.NTries;
+    count = 0;
+    // done = false;
+  }
 });
