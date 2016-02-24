@@ -1,11 +1,13 @@
 var count = 0;
 var NTries = 0;
+var workingTabId = 0;
 var done = false;
 
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
-  if (info.status == "complete" && NTries != 0) {
+  //alert(tabId + ' ' + workingTabId);
+  if (workingTabId == tabId && info.status == "complete" && NTries != 0) {
     if (count < NTries) {
-      chrome.tabs.reload(null, null, null);
+      chrome.tabs.reload(workingTabId, null, null);
       count++;
     }
     else if (!done) {
@@ -22,8 +24,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     count = NTries;
     done = true;
   }
-  if (request.NTries) {
+  if (request.NTries && request.tabId) {
     NTries = request.NTries;
+    workingTabId = request.tabId;
     count = 0;
     done = false;
   }

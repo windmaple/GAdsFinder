@@ -20,7 +20,7 @@ var options = {
 function initRefresh() {
   var x = document.getElementById('simpleForm');
   searchStr = x[0].value;
-  chrome.runtime.sendMessage({NTries: Number(x[1].value)});
+  chrome.runtime.sendMessage({NTries: Number(x[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
   chrome.devtools.inspectedWindow.reload(options);
 }
 
