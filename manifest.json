@@ -1,5 +1,5 @@
 {
-  "name": "Google ads finder",
+  "name": "strFinder",
   "version": "0.1",
   "description": "A simple tool to find the specified search string in response headers by refreshing pages",
   "devtools_page": "strfinder.html",
