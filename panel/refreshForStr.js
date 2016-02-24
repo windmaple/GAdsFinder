@@ -1,11 +1,11 @@
+var found = false;
+var searchStr = "";
+
 chrome.devtools.network.onRequestFinished.addListener(function (request) {
   for(var i=0; i<request.response.headers.length; i++) {
-    //    alert(request.response.headers[i].value);
     if(request.response.headers[i].value.indexOf(searchStr) != -1 && found == false) {
-      //alert("found; stopping refreshing");
-      //alert(request.response.headers[i].value.indexOf(searchStr));
       found = true;
-      chrome.runtime.sendMessage({foundAd: "yes"}, null);
+      chrome.runtime.sendMessage({foundStr: "yes"}, null);
     }
   }
 });
@@ -18,8 +18,6 @@ var options = {
 };
 
 function initRefresh() {
-  found = false;
-  searchStr = "";
   var x = document.getElementById('simpleForm');
   searchStr = x[0].value;
   chrome.runtime.sendMessage({NTries: Number(x[1].value)});

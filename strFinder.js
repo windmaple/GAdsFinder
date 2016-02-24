@@ -1,8 +1,6 @@
 chrome.devtools.panels.create(
-    'GoogleAdFinder',
+    'strFinder',
     null, // No icon path
-    'panel/refreshForGoogleAd.html',
+    'panel/refreshForStr.html',
     null // no callback needed
 );
-
-

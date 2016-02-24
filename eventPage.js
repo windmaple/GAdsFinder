@@ -17,7 +17,7 @@ chrome.tabs.onUpdated.addListener(function(tabId , info) {
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.foundAd == "yes") {
+  if (request.foundStr == "yes") {
     alert("Search string found after " + (count+1) + " tries! Stopping refresh!");
     count = NTries;
     done = true;
