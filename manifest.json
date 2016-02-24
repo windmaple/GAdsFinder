@@ -1,6 +1,6 @@
 {
   "name": "strFinder",
-  "version": "0.1",
+  "version": "0.2",
   "description": "A simple tool to find the specified search string in response headers by refreshing pages",
   "devtools_page": "strfinder.html",
   "manifest_version": 2,
