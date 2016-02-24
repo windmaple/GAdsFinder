@@ -1,31 +1,30 @@
-var count = 1;
+var count = 0;
 var NTries = 0;
-//var done = false;
+var done = false;
 
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
-
-  if (info.status == "complete") {
+  if (info.status == "complete" && NTries != 0) {
     if (count < NTries) {
       chrome.tabs.reload(null, null, null);
       count++;
-      alert(count);
     }
-    // else if (!done)
-    //   alert("not found");
-    //   count = 0;
-    //   done = true;
-    // }
+    else if (!done) {
+      alert("Search string NOT found after " + count + " tries! Giving up :(");
+      done = true;
+      count = 0;
+    }
   }
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.foundAd == "yes") {
+    alert("Search string found after " + (count+1) + " tries! Stopping refresh!");
     count = NTries;
-    alert("Ad found! Stopping refresh!");
+    done = true;
   }
   if (request.NTries) {
     NTries = request.NTries;
     count = 0;
-    // done = false;
+    done = false;
   }
 });
