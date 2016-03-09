@@ -1,6 +1,6 @@
 var count = 0;
 var NTries = 0;
-var workingTabId = -1000;
+var workingTabId = -1000;  // ramdom tab ID
 var done = false;
 
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
