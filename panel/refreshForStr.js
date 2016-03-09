@@ -3,7 +3,7 @@ var searchStr = "";
 
 chrome.devtools.network.onRequestFinished.addListener(function (request) {
   for(var i=0; i<request.response.headers.length; i++) {
-    if(request.response.headers[i].value.indexOf(searchStr) != -1 && found == false) {
+    if(searchStr && equest.response.headers[i].value.indexOf(searchStr) != -1 && found == false) {
       found = true;
       chrome.runtime.sendMessage({foundStr: "yes"}, null);
     }

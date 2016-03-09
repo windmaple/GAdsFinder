@@ -1,6 +1,6 @@
 var count = 0;
 var NTries = 0;
-var workingTabId = 0;
+var workingTabId = -1000;
 var done = false;
 
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
