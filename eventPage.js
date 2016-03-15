@@ -18,6 +18,10 @@ chrome.tabs.onUpdated.addListener(function(tabId , info) {
   }
 });
 
+chrome.webNavigation.onErrorOccurred.addListener(function(details) {
+  chrome.tabs.reload(workingTabId, null, null);
+});
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.foundStr == "yes") {
     alert("Search string found after " + (count+1) + " tries! Stopping refresh!");
