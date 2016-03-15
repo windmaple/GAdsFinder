@@ -5,17 +5,19 @@ var done = false;
 
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
   // TODO: timeout request will not be 'complete', thus causing stallling
-  if (workingTabId == tabId && info.status == "complete" && NTries != 0) {
-    if (count < NTries) {
-      chrome.tabs.reload(workingTabId, null, null);
-      count++;
+  setTimeout(function() {
+    if (workingTabId == tabId && info.status == "complete" && NTries != 0) {
+      if (count < NTries) {
+        chrome.tabs.reload(workingTabId, null, null);
+        count++;
+      }
+      else if (!done) {
+        alert("Search string NOT found after " + (count+1) + " tries! Giving up :(");
+        done = true;
+        count = 0;
+      }
     }
-    else if (!done) {
-      alert("Search string NOT found after " + count + " tries! Giving up :(");
-      done = true;
-      count = 0;
-    }
-  }
+  }, 2000);
 });
 
 // TODO: no idea why this doesn't work; worth exploring some other day
@@ -30,9 +32,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     done = true;
   }
   if (request.NTries && request.tabId) {
-    NTries = request.NTries-1;
+    NTries = request.NTries-1;      // -1 due to initRefresh()
     workingTabId = request.tabId;
     count = 0;
     done = false;
+    chrome.tabs.sendMessage(workingTabId, {greeting: "hello"});
   }
 });
