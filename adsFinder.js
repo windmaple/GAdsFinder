@@ -1,5 +1,5 @@
 chrome.devtools.panels.create(
-    'strFinder',
+    'adsFinder',
     null, // No icon path
     'panel/refreshForStr.html',
     null // no callback needed

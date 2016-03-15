@@ -1,18 +1,17 @@
 <html>
 <body>
   <script src="refreshForStr.js"></script>
-  <h2> This simple tools aims to find the specified search string in response headers
-      by refreshing the page many times. </h2>
-  <p> A typical use case is to find an ad: </p>
-  <p> Sellside: use 'client=ca-pub-XXX' or 'ca-pub-XXX' as the search string,
-      where ca-pub-XXX is the pub ID </p>
+  <h2> This simple tool aims to help Sellside TAMs surface sporadic Google ads by keeping refreshing the active webpage. </h2>
+  <p> A typical use case is to find an ad from a syndicator partner who only owns a small share of the publisher's traffic. </p>
+  <p> Usage: use 'ca-pub-XXX' as the search string, where ca-pub-XXX is the pub ID </p>
   <br>
-  <form id='simpleForm'>
-    String to search for in response headers:<br>
+  <form id='searchStrForm'>
+    <b>Partner property ID:</b><br>
     <input type="text" name="searchString" value="ca-pub-"><br><br>
-    Number of tries (1-1000):<br>
-    <input type="number" name="NTries" value="3" min="1" max="1000"><br>
+    <b>Max# of tries (1-1000):</b><br>
+    <input type="number" name="NTries" value="3" min="1" max="1000"><br><br>
+    <b>Currently trying: </b><div id='count'>0</div>
   </form>
-  <button id='simpleButton'>Start</button>
+  <button id='startButton'>Start</button>
 </body>
 </html>

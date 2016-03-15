@@ -13,7 +13,7 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
     chrome.devtools.inspectedWindow.reload(options);
   }
   else {
-    Sellside
+    // Sellside
     for(var i=0; i<request.response.headers.length; i++) {
       if(searchStr && request.response.headers[i].value.indexOf(searchStr) != -1 && found == false) {
         found = true;
@@ -50,18 +50,18 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
 });
 
 
-
 function initRefresh() {
-  var x = document.getElementById('simpleForm');
-  searchStr = x[0].value;
-  chrome.runtime.sendMessage({NTries: Number(x[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
+  var searchStrForm = document.getElementById('searchStrForm');
+  searchStr = searchStrForm[0].value;
+  chrome.runtime.sendMessage({NTries: Number(searchStrForm[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
   chrome.devtools.inspectedWindow.reload(options);
+  //document.getElementById('count').innerHTML = 1;
 }
 
 // This is very weird code (found in chrome-preprocess).
 // Somehow straight 'onClick' of button doesn't work.
 function listen() {
-  var startButton = document.getElementById('simpleButton');
+  var startButton = document.getElementById('startButton');
   startButton.addEventListener('click', initRefresh);
 }
 
