@@ -12,7 +12,8 @@
   "permissions":
    [
      "tabs",
-     "activeTab"
+     "activeTab",
+     "https://*.google.com/"
    ],
   "minimum_chrome_version": "18",
   "background": {

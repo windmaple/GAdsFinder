@@ -4,7 +4,7 @@ var workingTabId = -1000;  // ramdom tab ID
 var done = false;
 
 chrome.tabs.onUpdated.addListener(function(tabId , info) {
-  //alert(tabId + ' ' + workingTabId);
+  // TODO: timeout request will not be 'complete', thus causing stallling
   if (workingTabId == tabId && info.status == "complete" && NTries != 0) {
     if (count < NTries) {
       chrome.tabs.reload(workingTabId, null, null);
