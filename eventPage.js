@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     done = true;
   }
   if (request.NTries && request.tabId) {
-    NTries = request.NTries;
+    NTries = request.NTries-1;
     workingTabId = request.tabId;
     count = 0;
     done = false;
