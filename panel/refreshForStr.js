@@ -7,6 +7,16 @@ var options = {
   preprocessingScript: null
 };
 
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     alert('here');
+//     console.log(sender.tab ?
+//                 "from a content script:" + sender.tab.url :
+//                 "from the extension");
+//     if (request.greeting == "hello")
+//       sendResponse({farewell: "goodbye"});
+//   });
+
 chrome.devtools.network.onRequestFinished.addListener(function (request) {
   if(request.request.url.indexOf("google") != -1 &&
       (request.response.status == "400" || request.response.status == "408")) {
@@ -59,8 +69,11 @@ function initRefresh() {
     chrome.devtools.inspectedWindow.reload(options);
   }
   else alert('Please input a number between 1 and 1000!')
-
   //document.getElementById('count').innerHTML = 1;
+}
+
+function stopRefresh() {
+  chrome.runtime.sendMessage({stop: true});
 }
 
 // This is very weird code (found in chrome-preprocess).
@@ -68,6 +81,8 @@ function initRefresh() {
 function listen() {
   var startButton = document.getElementById('startButton');
   startButton.addEventListener('click', initRefresh);
+  var stopButton = document.getElementById('stopButton');
+  stopButton.addEventListener('click', stopRefresh);
 }
 
 window.addEventListener('load', listen);

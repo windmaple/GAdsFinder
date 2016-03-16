@@ -36,6 +36,10 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     workingTabId = request.tabId;
     count = 0;
     done = false;
-    chrome.tabs.sendMessage(workingTabId, {greeting: "hello"});
+  }
+  if (request.stop) {
+    alert('Aborted after ' + (count+1) + " tries!");
+    count = NTries;
+    done = true;
   }
 });
