@@ -53,6 +53,7 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
 function initRefresh() {
   var searchStrForm = document.getElementById('searchStrForm');
   searchStr = searchStrForm[0].value;
+  found = false;
   if(Number(searchStrForm[1].value)>=1 && Number(searchStrForm[1].value) <= 1000) {
     chrome.runtime.sendMessage({NTries: Number(searchStrForm[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
     chrome.devtools.inspectedWindow.reload(options);
