@@ -3,7 +3,7 @@ var windowObj;
 var pubURL;
 
 chrome.devtools.panels.create(
-  'adsFinder',
+  'GAdsFinder',
   null, // No icon path
   'panel/refreshForAd.html',
   function(panel){
