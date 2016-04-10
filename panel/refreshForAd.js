@@ -68,12 +68,16 @@ function initRefresh() {
     chrome.runtime.sendMessage({NTries: Number(searchStrForm[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
     chrome.devtools.inspectedWindow.reload(options);
     document.getElementById('count').innerHTML = 0;
+    document.getElementById('startButton').disabled = true;
+    document.getElementById('stopButton').disabled = false;
   }
   else alert('Please input a number between 1 and 1000!')
 }
 
 function stopRefresh() {
   chrome.runtime.sendMessage({stop: true});
+  document.getElementById('stopButton').disabled = true;
+  document.getElementById('startButton').disabled = false;
 }
 
 // This is very weird code (found in chrome-preprocess).
@@ -82,6 +86,7 @@ function listen() {
   var startButton = document.getElementById('startButton');
   startButton.addEventListener('click', initRefresh);
   var stopButton = document.getElementById('stopButton');
+  stopButton.disabled = true;
   stopButton.addEventListener('click', stopRefresh);
 }
 
