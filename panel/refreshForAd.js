@@ -67,9 +67,9 @@ function initRefresh() {
   if(Number(searchStrForm[1].value)>=1 && Number(searchStrForm[1].value) <= 1000) {
     chrome.runtime.sendMessage({NTries: Number(searchStrForm[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
     chrome.devtools.inspectedWindow.reload(options);
+    document.getElementById('count').innerHTML = 0;
   }
   else alert('Please input a number between 1 and 1000!')
-  //document.getElementById('count').innerHTML = 1;
 }
 
 function stopRefresh() {

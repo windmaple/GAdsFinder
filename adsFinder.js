@@ -8,22 +8,22 @@ chrome.devtools.panels.create(
   'panel/refreshForAd.html',
   function(panel){
     panel.onShown.addListener(function tmp(panel_window){
-      panel.onShown.removeListner(tmp);
+      //panel.onShown.removeListner(tmp);
       windowObj = panel_window;
     });
   }
 );
 
 
-
-chrome.devtools.network.onRequestFinished.addListener(
+chrome.devtools.network.onNavigated.addListener(
   function(entries) {
-    if (!pubURL) {
-      pubURL = entries.request.url;
+    if (windowObj.document.getElementById('count').innerHTML == 0) {
+      view_counts = 2;
+      windowObj.document.getElementById('count').innerHTML = 1;
     }
-    else if(entries.request.url == pubURL){
-      view_counts++;
+    else {
       windowObj.document.getElementById('count').innerHTML = view_counts;
+      view_counts++;
     }
   }
 );
