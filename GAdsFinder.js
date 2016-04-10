@@ -8,7 +8,6 @@ chrome.devtools.panels.create(
   'panel/refreshForAd.html',
   function(panel){
     panel.onShown.addListener(function tmp(panel_window){
-      //panel.onShown.removeListner(tmp);
       windowObj = panel_window;
     });
   }

@@ -69,15 +69,17 @@ function initRefresh() {
     chrome.devtools.inspectedWindow.reload(options);
     document.getElementById('count').innerHTML = 0;
     document.getElementById('startButton').disabled = true;
-    document.getElementById('stopButton').disabled = false;
+    document.getElementById('resetButton').disabled = false;
   }
-  else alert('Please input a number between 1 and 1000!')
+  else
+    alert('Please input a number between 1 and 1000!');
 }
 
-function stopRefresh() {
+function Reset() {
   chrome.runtime.sendMessage({stop: true});
-  document.getElementById('stopButton').disabled = true;
+  document.getElementById('resetButton').disabled = true;
   document.getElementById('startButton').disabled = false;
+  document.getElementById('count').innerHTML = 0;
 }
 
 // This is very weird code (found in chrome-preprocess).
@@ -85,9 +87,9 @@ function stopRefresh() {
 function listen() {
   var startButton = document.getElementById('startButton');
   startButton.addEventListener('click', initRefresh);
-  var stopButton = document.getElementById('stopButton');
-  stopButton.disabled = true;
-  stopButton.addEventListener('click', stopRefresh);
+  var resetButton = document.getElementById('resetButton');
+  resetButton.disabled = true;
+  resetButton.addEventListener('click', Reset);
 }
 
 window.addEventListener('load', listen);

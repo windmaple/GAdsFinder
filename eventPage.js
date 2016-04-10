@@ -38,7 +38,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     done = false;
   }
   if (request.stop) {
-    alert('Aborted after ' + (count+1) + " tries!");
+    alert('Reset!');
     count = NTries;
     done = true;
   }
