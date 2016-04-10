@@ -7,16 +7,6 @@ var options = {
   preprocessingScript: null
 };
 
-// chrome.runtime.onMessage.addListener(
-//   function(request, sender, sendResponse) {
-//     alert('here');
-//     console.log(sender.tab ?
-//                 "from a content script:" + sender.tab.url :
-//                 "from the extension");
-//     if (request.greeting == "hello")
-//       sendResponse({farewell: "goodbye"});
-//   });
-
 chrome.devtools.network.onRequestFinished.addListener(function (request) {
   if(request.request.url.indexOf("google") != -1 &&
       (request.response.status == "400" || request.response.status == "408")) {

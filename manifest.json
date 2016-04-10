@@ -1,6 +1,6 @@
 {
   "name": "GAdsFinder",
-  "version": "0.3",
+  "version": "0.9",
   "description": "A simple tool to surface sporadic Google ads by keeping refreshing pages",
   "devtools_page": "GAdsFinder.html",
   "manifest_version": 2,
