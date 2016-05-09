@@ -1,5 +1,7 @@
 var found = false;
-var searchStr = "";
+var pubID = "";
+var adTagID = "";
+var adSize = "";
 var options = {
   ignoreCache: true,
   userAgent: null,
@@ -14,16 +16,38 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
   }
   else {
     // Sellside
+    requestURL = request.request.url
+
     for(var i=0; i<request.response.headers.length; i++) {
-      if(searchStr && request.response.headers[i].value.indexOf(searchStr) != -1 && found == false) {
+      responseValue = request.response.headers[i].value
+
+      // This is wrong logic. 
+      // It seems we would need to read the response body, but this is not implemented in Chrome API
+      // https://bugs.chromium.org/p/chromium/issues/detail?id=487422&can=2&start=0&num=100&q=&colspec=ID%20Pri%20M%20Stars%20ReleaseBlock%20Component%20Status%20Owner%20Summary%20OS%20Modified&groupby=&sort=
+      if(pubID && responseValue.indexOf(pubID) != -1 && found == false) {
         found = true;
-        chrome.runtime.sendMessage({foundStr: "yes"}, null);
-        break;
+
+        if(adTagID) {
+          if(requestURL.indexOf(adTagID) == -1) {
+            found = false;
+            continue
+          }
+        }
+        if(adSize) {
+          if(requestURL.indexOf(adSize) == -1) {
+            found = false;
+            continue
+          }
+        }
+        if(found) {
+          chrome.runtime.sendMessage({foundStr: "yes"}, null);
+          break;
+        }
       }
     }
 
     // // Buyside: for DBM ads and 3rd party DSPs
-    // if(searchStr && found == false && request.request.url.indexOf("adclick.g.doubleclick.net") != -1) {
+    // if(pubID && found == false && request.request.url.indexOf("adclick.g.doubleclick.net") != -1) {
     //   // TODO: We need to make sure there is a valid response
     //   //if(request.response.headers[j].value.indexOf("ca-pub-") != -1)
     //   clickMagicURL = 'https://clickmagic.corp.google.com/jsapi?url=' + request.request.url.match("adclick\.g\.doubleclick\.net.*$");
@@ -36,7 +60,7 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
     //   responseTextinJSON = clickMagicRequest.responseText.replace(/^\)\]\}\'/i,"");
     //   var clickMagicResponse = JSON.parse(responseTextinJSON);
     //   alert(clickMagicResponse.decoded_query[0].advertiser_info.customer_id) ;
-    //   if(clickMagicResponse.decoded_query[0].advertiser_info.customer_id = searchStr) {
+    //   if(clickMagicResponse.decoded_query[0].advertiser_info.customer_id = pubID) {
     //      found = true;
     //      chrome.runtime.sendMessage({foundStr: "yes"}, null);
     //   }
@@ -52,10 +76,13 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
 
 function initRefresh() {
   var searchStrForm = document.getElementById('searchStrForm');
-  searchStr = searchStrForm[0].value;
+  pubID = searchStrForm[0].value;
+  adTagID = searchStrForm[1].value;
+  adSize = searchStrForm[2].value;
+  maxTries = Number(searchStrForm[3].value);
   found = false;
-  if(Number(searchStrForm[1].value)>=1 && Number(searchStrForm[1].value) <= 1000) {
-    chrome.runtime.sendMessage({NTries: Number(searchStrForm[1].value), tabId: chrome.devtools.inspectedWindow.tabId});
+  if(maxTries>=1 && maxTries <= 1000) {
+    chrome.runtime.sendMessage({NTries: maxTries, tabId: chrome.devtools.inspectedWindow.tabId});
     chrome.devtools.inspectedWindow.reload(options);
     document.getElementById('count').innerHTML = 0;
     document.getElementById('startButton').disabled = true;
