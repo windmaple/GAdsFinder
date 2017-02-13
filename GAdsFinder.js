@@ -4,7 +4,7 @@ var pubURL;
 
 chrome.devtools.panels.create(
   'GAdsFinder',
-  null, // No icon path
+  null, 			// No icon path
   'panel/refreshForAd.html',
   function(panel){
     panel.onShown.addListener(function tmp(panel_window){

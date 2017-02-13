@@ -1,19 +1,19 @@
 <html>
-<body>
-  <script src="refreshForAd.js"></script>
-  <h2> This simple tool aims to help Sellside TAMs surface sporadic Google ads. </h2>
-  <p> A typical use case is to find an ad from a syndicator partner (NPM) who only owns a small share of the publisher's traffic. <br>
-     The extension will keep refreshing the webpage until it sees the specified search string in a response, which means it has found a desirable Google ad.</p>
-  <p> <b>Usage:</b> use 'ca-pub-XXX' as the search string, where ca-pub-XXX is the pub ID </p>
-  <br>
-  <form id='searchStrForm'>
-    <b>Partner property ID:</b><br>
-    <input type="text" name="searchString" value="wind"><br><br>
-    <b>Max# of tries (1-1000):</b><br>
-    <input type="number" name="NTries" value="3" min="1" max="1000"><br><br>
-    <b>Currently trying: </b><div id='count'>0</div>
-  </form>
-  <button id='startButton'>Start</button>
-  <button id='resetButton'>Reset</button>
-</body>
+  <body>
+    <script src="refreshForAd.js"></script>
+    <h2> This simple tool aims to help Sellside TAMs surface sporadic Google ads. </h2>
+    <p> A typical use case is to find an ad from a syndicator partner (NPM) who only owns a small share of the publisher's traffic. <br>
+       The extension will keep refreshing the webpage until it sees the specified search string in a response, which means it has found a desirable Google ad.</p>
+    <p> <b>Usage:</b> use 'ca-pub-XXX' as the search string, where ca-pub-XXX is the pub ID </p>
+    <br>
+    <form id='searchStrForm'>
+      <b>Partner property ID:</b><br>
+      <input type="text" name="searchString" value="wind"><br><br>
+      <b>Max# of tries (1-1000):</b><br>
+      <input type="number" name="NTries" value="3" min="1" max="1000"><br><br>
+      <b>Currently trying: </b><div id='count'>0</div>
+    </form>
+    <button id='startButton'>Start</button>
+    <button id='resetButton'>Reset</button>
+  </body>
 </html>

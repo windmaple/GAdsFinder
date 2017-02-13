@@ -21,6 +21,7 @@ chrome.tabs.onUpdated.addListener(function(tabId , info) {
 });
 
 // TODO: no idea why this doesn't work; worth exploring some other day
+//
 // chrome.webNavigation.onErrorOccurred.addListener(function(details) {
 //   chrome.tabs.reload(workingTabId, null, null);
 // });

@@ -7,6 +7,7 @@ var options = {
   preprocessingScript: null
 };
 
+
 chrome.devtools.network.onRequestFinished.addListener(function (request) {
   if(request.request.url.indexOf("google") != -1 &&
       (request.response.status == "400" || request.response.status == "408")) {
@@ -22,7 +23,8 @@ chrome.devtools.network.onRequestFinished.addListener(function (request) {
       }
     }
 
-    // // Buyside: for DBM ads and 3rd party DSPs
+    // Buyside: for DBM ads and 3rd party DSPs
+    //
     // if(searchStr && found == false && request.request.url.indexOf("adclick.g.doubleclick.net") != -1) {
     //   // TODO: We need to make sure there is a valid response
     //   //if(request.response.headers[j].value.indexOf("ca-pub-") != -1)
